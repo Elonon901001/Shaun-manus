@@ -1,0 +1,22 @@
+{
+  "scripts": {
+    "dev:web": "vite web --host 0.0.0.0 --port 3000",
+    "dev:api": "node -e \"const {spawn}=require('child_process'); const path=require('path'); const python=path.join(process.cwd(),'.venv','Scripts','python.exe'); const p=spawn(python,['-c','import uvicorn; uvicorn.run(\\\"api.main:app\\\", host=\\\"127.0.0.1\\\", port=8001)'],{stdio:'inherit'}); p.on('exit', c=>process.exit(c ?? 0));\"",
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-router-dom": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "concurrently": "latest",
+    "typescript": "latest"
+  }
+}

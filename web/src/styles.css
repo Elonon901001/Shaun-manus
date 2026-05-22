@@ -1,0 +1,159 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #0f1117;
+  color: #f4f4f5;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+.shell {
+  min-height: 100vh;
+  padding: 48px 20px;
+}
+
+.panel {
+  width: min(920px, 100%);
+  min-height: calc(100vh - 96px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+header {
+  padding: 8px 4px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #8b949e;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: 36px;
+}
+
+.subtitle {
+  color: #a1a1aa;
+}
+
+.messages {
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  border: 1px solid #27272a;
+  border-radius: 18px;
+  background: #18181b;
+  overflow: auto;
+}
+
+.empty {
+  margin: auto;
+  color: #71717a;
+}
+
+.message {
+  max-width: 76%;
+  padding: 14px 16px;
+  border-radius: 16px;
+  line-height: 1.6;
+}
+
+.message span {
+  display: block;
+  margin-bottom: 6px;
+  color: #a1a1aa;
+  font-size: 13px;
+}
+
+.message p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.message.user {
+  align-self: flex-end;
+  background: #2563eb;
+}
+
+.message.assistant {
+  align-self: flex-start;
+  background: #27272a;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.event {
+  padding: 14px 16px;
+  border: 1px solid #3f3f46;
+  border-radius: 14px;
+  background: #111827;
+}
+
+.event strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #facc15;
+}
+
+.event.status strong {
+  color: #38bdf8;
+}
+
+.event pre {
+  margin: 0;
+  overflow: auto;
+  white-space: pre-wrap;
+  color: #d4d4d8;
+}
+
+form {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid #27272a;
+  border-radius: 18px;
+  background: #18181b;
+}
+
+textarea {
+  flex: 1;
+  resize: none;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  line-height: 1.5;
+}
+
+button {
+  width: 96px;
+  border: 0;
+  border-radius: 12px;
+  background: #f4f4f5;
+  color: #18181b;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}

@@ -1,0 +1,14 @@
+services:
+  sandbox:
+    build:
+      context: ./sandbox
+    container_name: manus-sandbox
+    working_dir: /workspace
+    command: sleep infinity
+    volumes:
+      - sandbox-workspace:/workspace
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  sandbox-workspace:
