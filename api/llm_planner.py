@@ -8,8 +8,8 @@ from api.planner import normalize_plan
 from api.planner_input import PlannerInput, build_planner_input
 from api.schemas import AgentPlan
 
-OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses"
-DEFAULT_OPENAI_MODEL = "gpt-4.1"
+OPENAI_RESPONSES_URL = "https://ai.allrealai.com/v1/responses"
+DEFAULT_OPENAI_MODEL = "gpt-5.5"
 
 
 def build_system_prompt() -> str:
@@ -83,7 +83,9 @@ def call_openai_responses(payload: dict[str, Any], api_key: str) -> dict[str, An
         data=json.dumps(payload).encode("utf-8"),
         headers={
             "Authorization": f"Bearer {api_key}",
+            "Accept": "application/json",
             "Content-Type": "application/json",
+            "User-Agent": "shaun-manus/0.1",
         },
         method="POST",
     )

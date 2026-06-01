@@ -1,5 +1,6 @@
 import io
 import json
+import os
 import tempfile
 import unittest
 from contextlib import redirect_stdout
@@ -115,6 +116,36 @@ class CliTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertEqual(plan.source, "external")
         self.assertEqual(plan.steps[0].tool, "list_files")
+
+    def test_load_local_env_reads_dotenv_values(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            env_path = Path(temp_dir) / ".env"
+            env_path.write_text(
+                "\n".join(
+                    [
+                        "# local development settings",
+                        "OPENAI_API_KEY=test-key",
+                        'OPENAI_MODEL="test-model"',
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            with patch.dict(os.environ, {}, clear=True):
+                cli.load_local_env(env_path)
+
+                self.assertEqual(os.environ["OPENAI_API_KEY"], "test-key")
+                self.assertEqual(os.environ["OPENAI_MODEL"], "test-model")
+
+    def test_load_local_env_does_not_override_existing_environment(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            env_path = Path(temp_dir) / ".env"
+            env_path.write_text("OPENAI_API_KEY=file-key", encoding="utf-8")
+
+            with patch.dict(os.environ, {"OPENAI_API_KEY": "shell-key"}, clear=True):
+                cli.load_local_env(env_path)
+
+                self.assertEqual(os.environ["OPENAI_API_KEY"], "shell-key")
 
     def test_main_plan_file_skips_build_plan(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:

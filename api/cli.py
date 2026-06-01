@@ -1,6 +1,7 @@
 import argparse
 import asyncio
 import json
+import os
 from pathlib import Path
 import sys
 
@@ -12,6 +13,8 @@ from api.repair_explain import explain_run
 from api.schemas import AgentPlan, AgentStep
 from api.tool_manifest import tool_manifest_json
 
+ENV_FILE = Path(__file__).resolve().parent.parent / ".env"
+
 
 def load_plan_file(path: str) -> AgentPlan:
     return plan_from_json(Path(path).read_text(encoding="utf-8"))
@@ -19,6 +22,22 @@ def load_plan_file(path: str) -> AgentPlan:
 
 def load_run_plan(run_dir: str) -> AgentPlan:
     return load_plan_file(str(Path(run_dir) / "plan.json"))
+
+
+def load_local_env(path: Path = ENV_FILE) -> None:
+    if not path.exists():
+        return
+
+    for line in path.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#") or "=" not in stripped:
+            continue
+
+        key, value = stripped.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key and key not in os.environ:
+            os.environ[key] = value
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -45,6 +64,8 @@ def main(argv: list[str] | None = None) -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
         sys.stderr.reconfigure(encoding="utf-8")
+
+    load_local_env()
 
     parser = build_parser()
     args = parser.parse_args(argv)
