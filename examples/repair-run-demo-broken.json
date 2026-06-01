@@ -1,0 +1,26 @@
+{
+  "version": "planner.v1",
+  "source": "manual",
+  "goal": "Create a Python file with an unclosed delimiter so repair-run can fix it.",
+  "max_steps": 8,
+  "context": {},
+  "steps": [
+    {
+      "id": "step_1",
+      "thought": "Write intentionally broken Python code.",
+      "tool": "write_file",
+      "input": {
+        "path": "repair_demo.py",
+        "content": "print([1, 2, 3"
+      }
+    },
+    {
+      "id": "step_2",
+      "thought": "Run the broken file to produce a saved failed run.",
+      "tool": "run_shell",
+      "input": {
+        "command": "python repair_demo.py"
+      }
+    }
+  ]
+}

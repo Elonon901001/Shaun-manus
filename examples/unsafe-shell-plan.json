@@ -1,0 +1,17 @@
+{
+  "version": "planner.v1",
+  "source": "manual",
+  "goal": "Demonstrate shell safety guard.",
+  "max_steps": 8,
+  "context": {},
+  "steps": [
+    {
+      "id": "step_1",
+      "thought": "This command should be blocked before Docker execution.",
+      "tool": "run_shell",
+      "input": {
+        "command": "rm -rf /"
+      }
+    }
+  ]
+}

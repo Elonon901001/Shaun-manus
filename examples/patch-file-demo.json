@@ -1,0 +1,44 @@
+{
+  "version": "planner.v1",
+  "source": "manual",
+  "goal": "Demonstrate atomic structured patch_file edits.",
+  "max_steps": 8,
+  "context": {},
+  "steps": [
+    {
+      "id": "step_1",
+      "thought": "Create a small settings file in the Docker sandbox.",
+      "tool": "write_file",
+      "input": {
+        "path": "settings_demo.py",
+        "content": "timeout = 20\nretries = 1\n"
+      }
+    },
+    {
+      "id": "step_2",
+      "thought": "Patch both settings in one atomic file edit.",
+      "tool": "patch_file",
+      "input": {
+        "path": "settings_demo.py",
+        "edits": [
+          {
+            "old_text": "timeout = 20",
+            "new_text": "timeout = 30"
+          },
+          {
+            "old_text": "retries = 1",
+            "new_text": "retries = 3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "step_3",
+      "thought": "Read the patched file.",
+      "tool": "read_file",
+      "input": {
+        "path": "settings_demo.py"
+      }
+    }
+  ]
+}

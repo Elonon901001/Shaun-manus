@@ -16,16 +16,16 @@ textarea {
 
 .shell {
   min-height: 100vh;
-  padding: 48px 20px;
+  padding: 32px 20px;
 }
 
 .panel {
-  width: min(920px, 100%);
-  min-height: calc(100vh - 96px);
+  width: min(1280px, 100%);
+  min-height: calc(100vh - 64px);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 header {
@@ -42,21 +42,39 @@ header {
 
 h1 {
   margin: 0;
-  font-size: 36px;
+  font-size: 34px;
 }
 
 .subtitle {
   color: #a1a1aa;
 }
 
+.workspace-grid {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+  gap: 18px;
+  flex: 1;
+}
+
+.chat-panel,
+.files-panel {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
 .messages {
-  min-height: 360px;
+  min-height: 320px;
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 14px;
   padding: 20px;
   border: 1px solid #27272a;
-  border-radius: 18px;
+  border-radius: 8px;
   background: #18181b;
   overflow: auto;
 }
@@ -69,7 +87,7 @@ h1 {
 .message {
   max-width: 76%;
   padding: 14px 16px;
-  border-radius: 16px;
+  border-radius: 8px;
   line-height: 1.6;
 }
 
@@ -96,15 +114,17 @@ h1 {
 }
 
 .timeline {
+  max-height: 240px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  overflow: auto;
 }
 
 .event {
   padding: 14px 16px;
   border: 1px solid #3f3f46;
-  border-radius: 14px;
+  border-radius: 8px;
   background: #111827;
 }
 
@@ -130,7 +150,7 @@ form {
   gap: 12px;
   padding: 14px;
   border: 1px solid #27272a;
-  border-radius: 18px;
+  border-radius: 8px;
   background: #18181b;
 }
 
@@ -147,7 +167,7 @@ textarea {
 button {
   width: 96px;
   border: 0;
-  border-radius: 12px;
+  border-radius: 8px;
   background: #f4f4f5;
   color: #18181b;
   cursor: pointer;
@@ -156,4 +176,170 @@ button {
 button:disabled {
   cursor: not-allowed;
   opacity: 0.6;
+}
+
+.files-panel {
+  padding: 16px;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  background: #18181b;
+}
+
+.files-header,
+.pathbar,
+.preview-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.files-header {
+  justify-content: space-between;
+}
+
+.files-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.icon-button {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  font-size: 20px;
+}
+
+.pathbar {
+  min-width: 0;
+}
+
+.pathbar button {
+  width: 64px;
+  height: 34px;
+  flex: 0 0 auto;
+  background: #27272a;
+  color: #f4f4f5;
+}
+
+.pathbar code {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  padding: 8px 10px;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  color: #d4d4d8;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.workspace-error {
+  padding: 10px 12px;
+  border: 1px solid #7f1d1d;
+  border-radius: 8px;
+  background: #2f1518;
+  color: #fecaca;
+}
+
+.file-list {
+  min-height: 170px;
+  max-height: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: auto;
+}
+
+.file-placeholder {
+  margin: auto;
+  color: #71717a;
+}
+
+.file-row {
+  width: 100%;
+  min-height: 38px;
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid #27272a;
+  background: #111827;
+  color: #f4f4f5;
+  text-align: left;
+}
+
+.file-row:hover {
+  border-color: #52525b;
+  background: #1f2937;
+}
+
+.file-row strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-row em {
+  color: #a1a1aa;
+  font-size: 12px;
+  font-style: normal;
+}
+
+.file-row.directory span {
+  color: #38bdf8;
+}
+
+.file-preview {
+  min-height: 280px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  background: #0f1117;
+}
+
+.preview-header {
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-bottom: 1px solid #27272a;
+}
+
+.preview-header strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.preview-header span {
+  flex: 0 0 auto;
+  color: #a1a1aa;
+  font-size: 12px;
+}
+
+.file-preview pre {
+  min-height: 0;
+  flex: 1;
+  margin: 0;
+  overflow: auto;
+  padding: 12px;
+  color: #d4d4d8;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 900px) {
+  .shell {
+    padding: 20px 12px;
+  }
+
+  .workspace-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .files-panel {
+    min-height: 560px;
+  }
 }

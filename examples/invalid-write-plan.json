@@ -1,0 +1,17 @@
+{
+  "version": "planner.v1",
+  "source": "manual",
+  "goal": "Demonstrate tool input validation.",
+  "max_steps": 8,
+  "context": {},
+  "steps": [
+    {
+      "id": "step_1",
+      "thought": "This step intentionally omits the required write_file path.",
+      "tool": "write_file",
+      "input": {
+        "content": "hello"
+      }
+    }
+  ]
+}

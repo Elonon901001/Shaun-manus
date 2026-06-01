@@ -1,0 +1,26 @@
+{
+  "version": "planner.v1",
+  "source": "manual",
+  "goal": "Write and run a Python file from a plan file.",
+  "max_steps": 8,
+  "context": {},
+  "steps": [
+    {
+      "id": "step_1",
+      "thought": "Write a Python script into the Docker sandbox.",
+      "tool": "write_file",
+      "input": {
+        "path": "from_plan_file.py",
+        "content": "print('hello from plan file')"
+      }
+    },
+    {
+      "id": "step_2",
+      "thought": "Run the generated Python script.",
+      "tool": "run_shell",
+      "input": {
+        "command": "python ${step_1.result.path}"
+      }
+    }
+  ]
+}
